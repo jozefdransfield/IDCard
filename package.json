@@ -1,0 +1,15 @@
+{
+	"name":"idcard",
+	"version":"0.0.1",
+	"dependencies":{
+		"ejs":"",
+		"express":"",
+		"less": "",
+		"boneidle":"",
+		"mongoose": ""
+	},
+	"scripts": {
+		"start": "node app.js"
+	}
+
+}

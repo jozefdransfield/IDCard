@@ -1,0 +1,18 @@
+<div class="row">
+	<div class="span12">
+		<h3>IDCard</h3>
+		<form class="well" method="post">
+			<%- partial('partial/textfield', { field: value.email }) %>
+			<%- partial('partial/textfield', { field: value.password }) %>
+			<fieldset class="control-group  <%=(messages.length > 0) ? "error":"" %>">
+				<ul class="help-block">
+					<% for (message in messages) { %>
+					<li><%= messages[message] %></li>
+					<% }%>
+				</ul>
+			</fieldset>
+			<button type="submit" class="btn btn-primary">Login</button>
+			<a href="/register" class="btn">Register</a>
+		</form>
+	</div>
+</div>

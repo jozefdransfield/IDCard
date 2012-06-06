@@ -1,0 +1,9 @@
+<fieldset class="control-group <%=(field.messages.length > 0) ? "error" : "" %>">
+	<label for="<%=field.name%>"><%=field.label%>:</label>
+	<input type="<%=field.type%>" name="<%=field.name%>" id="<%=field.name%>" class="span3" value="<%=field.value%>"/>
+	<ul class="help-block">
+	<% for (message in field.messages) { %>
+	<li><%= field.messages[message] %></li>
+	<% }%>
+	</ul>
+</fieldset>
