@@ -1,7 +1,7 @@
 var forms = require("../lib/forms");
 var b_ = require("boneidle");
 
-module.exports = function (app) {
+module.exports = function (app, loginService) {
     app.get('/login', function (req, res) {
         var form = forms.loginForm(req.body);
         res.render("local/index", form);
@@ -11,20 +11,21 @@ module.exports = function (app) {
         var form = forms.loginForm(req.body);
         b_.chain(forms.validateLoginForm).and(validateLogin).call(form, function (either) {
             if (either.isRight()) {
-                res.redirect("/");
+                res.redirect("/success");
             } else {
                 res.render('local/index', either.left());
             }
         });
     })
-}
 
-function validateLogin(form, callback) {
-    console.log(form.value.email.value.toLowerCase() === "jozef.dransfield@me.com" );
-    if (form.value.email.value.toLowerCase() === "jozef.dransfield@me.com" && form.value.password.value === "test") {
-        callback(b_.right(form))
-    } else {
-        form.messages.push("No username or password match");
-        callback(b_.left(form));
+    function validateLogin(form, callback) {
+        loginService.login(form.value.email.value, form.value.password.value, function(passed) {
+            if (passed) {
+                callback(b_.either.right(form));
+            } else {
+                callback(b_.either.left(form))  ;
+            }
+        });
     }
 }
+

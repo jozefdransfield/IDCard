@@ -1,0 +1,23 @@
+<div class="row">
+	<table class="table table-condensed">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Email</th>
+				<th>DisplayName</th>
+				<th>Password</th>
+			</tr>
+		</thead>
+		<tbody>
+		<% for (i in accounts) { %>
+			<tr>
+				<td><%= accounts[i].id %></td>
+				<td><%= accounts[i].email %></td>
+				<td><%= accounts[i].displayName %></td>
+				<td><%= accounts[i].password %></td>
+			</tr>
+		<% }%>
+		</tbody>
+	</table>
+
+</div>

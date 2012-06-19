@@ -2,6 +2,7 @@ var express = require('express')
 var app = express.createServer();
 var b_ = require("boneidle");
 var Config = require("./lib/config");
+var repositories = require("./lib/repositories")
 var mongoose = require("mongoose");
 
 var config = new Config(["./config.json", "/home/dotcloud/environment.json"]);
@@ -36,9 +37,15 @@ app.get('/', function (req, res) {
     res.redirect("/login")
 });
 
-require("./route/login")(app);
-require("./route/register")(app);
+require("./route/login")(app, repositories.loginService);
+require("./route/register")(app, repositories.accountRepository);
+require("./route/admin")(app, repositories.accountRepository);
 
+
+
+app.get("/success", function(req, res) {
+    res.render("success")
+});
 
 
 
